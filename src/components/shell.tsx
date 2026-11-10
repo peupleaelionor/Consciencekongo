@@ -64,6 +64,18 @@ export function Shell({ children }: { children: ReactNode }) {
               <span className="block text-xs text-muted">Conscience Kongo</span>
             </span>
           </Link>
+          <Link
+            to="/le-guide"
+            className="hidden items-center gap-2 sm:flex"
+            aria-label="Voir Guide Sirius"
+          >
+            <img
+              src="/brand/guide-visage.webp"
+              alt=""
+              className="h-11 w-11 rounded-full border border-gold object-cover object-[center_20%]"
+            />
+            <span className="hidden text-xs text-muted lg:block">Guide Sirius</span>
+          </Link>
           <div className="flex items-center gap-2">
             <a
               href={`tel:+${WHATSAPP_E164}`}

@@ -35,6 +35,25 @@ export function Boutique() {
         </div>
       </section>
 
+      <section className="border-t border-line">
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-5 px-4 py-8 sm:flex-row sm:items-center">
+          <img
+            src="/brand/guide-visage.webp"
+            alt="Portrait officiel de Guide Sirius."
+            className="h-24 w-20 border border-gold object-cover object-[center_20%]"
+          />
+          <div className="max-w-xl">
+            <p className="font-display text-xs tracking-widest text-gold">Le visage du Guide</p>
+            <p className="mt-1 text-muted">
+              Huit stations, du réveil à l'épreuve. On voit qui tient la lampe. Le seuil, lui, se commande à côté.
+            </p>
+          </div>
+          <Link to="/le-guide" className="inline-flex min-h-11 items-center border border-gold px-4 text-sm text-gold sm:ml-auto">
+            Voir Guide Sirius
+          </Link>
+        </div>
+      </section>
+
       <section className="border-t border-line bg-surface">
         <div className="mx-auto grid max-w-6xl gap-4 px-4 py-14 md:grid-cols-3">
           {[
