@@ -1,26 +1,25 @@
 # Temple Sirius
 
-Boutique numérique de **Guide Sirius**, école **Conscience Kongo**.
+Boutique de **Guide Sirius**, école **Conscience Kongo**.
 
-Quatre seuils :
+La commande passe par WhatsApp : [+243 965 531 737](https://wa.me/243965531737). La carte Stripe reste éteinte tant que `VITE_STRIPE_ENABLED` n'est pas `true`.
 
-| Produit | Prix |
+| Seuil | Prix |
 |---|---|
-| L'Aigle de Sirius (phare) | 247 € |
+| Rituels de Purification | 37 € |
 | Le Sceau d'Ankh | 47 € |
+| Le Début sur la Voie | 67 € |
 | Double Astre | 97 € |
+| L'Aigle de Sirius | 247 € |
 | L'Arbre Fermé | 490 € |
+| Formation Continue | 37 € / mois |
 
-Le sceau de l'école est dans `public/brand/logo.jpg`.
+Le sceau officiel reste `public/brand/logo.jpg`. Les autres visuels sont dans `public/brand/`, en WebP.
 
 ## Déploiement Vercel
 
-Le dépôt est prêt pour un import GitHub. Rien à configurer à la main.
+1. [Importer Consciencekongo sur Vercel](https://vercel.com/new/clone?repository-url=https://github.com/peupleaelionor/Consciencekongo).
+2. Branche **main**. Aucune variable. Ne pas remplir « Output Directory ».
+3. Deploy.
 
-1. Ouvrir [Importer Consciencekongo sur Vercel](https://vercel.com/new/clone?repository-url=https://github.com/peupleaelionor/Consciencekongo).
-2. Choisir le compte Vercel, laisser la branche **main**.
-3. Ne pas ajouter de variable d'environnement. Ne pas changer la commande de build. Ne pas remplir « Output Directory » : le build écrit l'API de sortie Vercel (`.vercel/output`), pas un dossier `dist`.
-4. Lancer **Deploy**.
-
-Node 22 et la région Paris (`cdg1`) sont déjà fixés. Le paiement n'est pas branché : la page confirme une demande, elle ne prélève rien.
-
+Node 22, région Paris. Rien n'est débité sur le site : Guide Sirius confirme le règlement sur WhatsApp.

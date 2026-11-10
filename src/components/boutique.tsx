@@ -1,304 +1,140 @@
-import { useEffect, useId, useState } from "react";
-import { formatPrice, products, shopBio, type Product } from "@/lib/catalog";
-import { useCart, type Order } from "@/lib/cart";
+import { Link } from "@tanstack/react-router";
+import { books, formations, shopBio } from "@/lib/catalog";
+import { echoes } from "@/lib/echoes";
+import { OrderActions, PriceBlock } from "@/components/order";
+import { WHATSAPP_DISPLAY, WHATSAPP_E164, waLink } from "@/lib/temple";
+import { useCart } from "@/lib/cart";
 
 export function Boutique() {
-  const [open, setOpen] = useState(false);
-  const [ready, setReady] = useState(false);
-  const ids = useCart((state) => state.ids);
-
-  useEffect(() => {
-    void useCart.persist.rehydrate();
-    setReady(true);
-  }, []);
-
-  const count = ready ? ids.length : 0;
-
   return (
-    <div className="min-h-screen bg-bg text-fg">
-      <header className="sticky top-0 z-20 border-b border-line bg-bg/95 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <a href="#entree" className="flex items-center gap-3">
-            <img
-              src="/brand/logo.jpg"
-              alt="Sceau Conscience Kongo, Guide Sirius"
-              className="h-14 w-10 object-cover object-center"
-            />
-            <span className="leading-tight">
-              <span className="block font-display text-sm tracking-widest text-gold">
-                Temple Sirius
-              </span>
-              <span className="block text-xs text-muted">Conscience Kongo</span>
-            </span>
-          </a>
-          <nav className="flex items-center gap-2">
-            <a
-              href="#seuils"
-              className="hidden px-3 py-2 text-sm text-muted sm:inline"
-            >
-              Les seuils
-            </a>
-            <a
-              href="#voie"
-              className="hidden px-3 py-2 text-sm text-muted sm:inline"
-            >
-              La voie
-            </a>
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="min-h-11 border border-gold bg-surface px-4 text-sm text-gold"
-            >
-              Panier{count > 0 ? ` · ${count}` : ""}
-            </button>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section id="entree" className="mx-auto max-w-3xl px-4 py-12 text-center sm:py-16">
-          <p className="font-display text-xs tracking-widest text-gold">Guide Sirius</p>
-          <img
-            src="/brand/logo.jpg"
-            alt="Conscience Kongo — Guide Sirius. Aigle, arbre, ankh, lune et soleil."
-            className="mx-auto mt-6 w-full max-w-md border border-line"
-          />
-          <h1 className="mt-8 font-display text-4xl tracking-wide text-fg sm:text-5xl">
-            Temple Sirius
-          </h1>
-          <p className="mx-auto mt-5 max-w-xl text-base text-muted">{shopBio}</p>
-          <a
-            href="#seuils"
-            className="mt-8 inline-flex min-h-11 items-center border border-gold bg-gold px-6 font-medium text-bg"
-          >
-            Entrer dans le Temple
-          </a>
-        </section>
-
-        <section id="seuils" className="border-t border-line bg-surface">
-          <div className="mx-auto max-w-6xl px-4 py-14">
-            <p className="font-display text-xs tracking-widest text-gold">Boutique</p>
-            <h2 className="mt-2 font-display text-3xl text-fg">Quatre seuils</h2>
-            <p className="mt-3 max-w-xl text-muted">
-              Numériques. Permanents. Remis après confirmation du Temple — aucun
-              prélèvement sur cette page.
-            </p>
-            <div className="mt-8 grid gap-4">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  held={ready && ids.includes(product.id)}
-                  onTake={() => {
-                    useCart.getState().add(product.id);
-                    setOpen(true);
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="voie" className="mx-auto max-w-6xl px-4 py-14">
-          <p className="font-display text-xs tracking-widest text-gold">La voie</p>
-          <h2 className="mt-2 font-display text-3xl">Comment le seuil s'ouvre</h2>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-3">
-            {[
-              ["01", "Tu choisis", "Un seuil, ou plusieurs. Le phare reste L'Aigle de Sirius."],
-              ["02", "Tu réserves", "Nom et adresse. Le Temple confirme l'accès sous 24 heures."],
-              ["03", "Tu reçois", "Le contenu numérique arrive par message. Rien ne se perd."],
-            ].map(([step, title, copy]) => (
-              <li key={step} className="border border-line bg-surface p-5">
-                <p className="font-display text-gold">{step}</p>
-                <h3 className="mt-2 font-display text-xl">{title}</h3>
-                <p className="mt-2 text-sm text-muted">{copy}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      </main>
-
-      <footer className="border-t border-line px-4 py-8 text-center text-sm text-muted">
-        Temple Sirius · Guide Sirius · École Conscience Kongo
-      </footer>
-
-      <CartDrawer open={open} onClose={() => setOpen(false)} />
-    </div>
-  );
-}
-
-function ProductCard({
-  product,
-  held,
-  onTake,
-}: {
-  product: Product;
-  held: boolean;
-  onTake: () => void;
-}) {
-  return (
-    <article
-      className={
-        product.featured
-          ? "grid gap-6 border border-gold bg-bg p-5 sm:grid-cols-[auto_1fr] sm:p-8"
-          : "grid gap-4 border border-line bg-bg p-5 sm:grid-cols-[1fr_auto] sm:items-center"
-      }
-    >
-      {product.featured ? (
+    <main id="contenu">
+      <section className="relative min-h-[82vh] overflow-hidden">
         <img
-          src="/brand/logo.jpg"
-          alt=""
-          className="h-40 w-28 object-cover sm:h-52 sm:w-36"
+          src="/brand/hero-temple.webp"
+          alt="Chemin de pierre mouillée entre des lanternes, la nuit, vers le Temple."
+          className="absolute inset-0 h-full w-full object-cover"
         />
-      ) : null}
-      <div className="flex flex-col justify-between gap-4">
-        <div>
-          <p className="text-xs tracking-widest text-gold">{product.kicker}</p>
-          <h3 className="mt-1 font-display text-2xl">{product.name}</h3>
-          <p className="mt-2 max-w-xl text-muted">{product.description}</p>
-          <p className="mt-2 text-sm text-gold-soft">{product.format}</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-4">
-          <p className="font-display text-2xl text-gold">{formatPrice(product.price)}</p>
-          <button
-            type="button"
-            onClick={onTake}
-            disabled={held}
-            className="min-h-11 border border-gold px-5 text-sm text-gold disabled:border-line disabled:text-muted"
-          >
-            {held ? "Déjà dans le panier" : "Réserver ce seuil"}
-          </button>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const ids = useCart((state) => state.ids);
-  const remove = useCart((state) => state.remove);
-  const place = useCart((state) => state.place);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [order, setOrder] = useState<Order | null>(null);
-  const titleId = useId();
-
-  const lines = ids
-    .map((id) => products.find((product) => product.id === id))
-    .filter((product): product is Product => Boolean(product));
-  const total = lines.reduce((sum, line) => sum + line.price, 0);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-
-  if (!open) return null;
-
-  return (
-    <div className="fixed inset-0 z-30 flex justify-end bg-bg/70">
-      <button type="button" aria-label="Fermer le panier" className="h-full flex-1" onClick={onClose} />
-      <aside
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        className="flex h-full w-full max-w-md flex-col border-l border-line bg-surface"
-      >
-        <div className="flex items-center justify-between border-b border-line px-5 py-4">
-          <h2 id={titleId} className="font-display text-xl">
-            Panier
-          </h2>
-          <button type="button" onClick={onClose} className="min-h-11 px-3 text-sm text-muted">
-            Fermer
-          </button>
-        </div>
-        <div className="flex-1 overflow-y-auto px-5 py-4">
-          {order ? (
-            <div>
-              <p className="font-display text-gold">Demande reçue</p>
-              <p className="mt-3 text-muted">
-                Référence {order.id}. Le Temple confirme l'accès de {order.name} sous
-                24 heures, à {order.email}. Aucun paiement n'a été prélevé ici.
-              </p>
-            </div>
-          ) : lines.length === 0 ? (
-            <p className="text-muted">Le panier est vide. Choisis un seuil.</p>
-          ) : (
-            <ul className="space-y-4">
-              {lines.map((line) => (
-                <li key={line.id} className="flex items-start justify-between gap-3 border-b border-line pb-4">
-                  <div>
-                    <p className="font-display">{line.name}</p>
-                    <p className="text-sm text-gold">{formatPrice(line.price)}</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => remove(line.id)}
-                    className="min-h-11 text-sm text-muted"
-                  >
-                    Retirer
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        {!order && lines.length > 0 ? (
-          <form
-            className="border-t border-line px-5 py-4"
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (name.trim().length < 2 || !email.includes("@")) {
-                setError("Nom et adresse valides, rien d'autre.");
-                return;
-              }
-              const placed = place(name, email);
-              if (placed) {
-                setOrder(placed);
-                setError("");
-              }
-            }}
-          >
-            <p className="font-display text-2xl text-gold">{formatPrice(total)}</p>
-            <label className="mt-4 block text-sm text-muted" htmlFor="reserve-name">
-              Nom
-            </label>
-            <input
-              id="reserve-name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              className="mt-1 w-full border border-line bg-bg px-3 py-3 text-fg"
-              autoComplete="name"
-            />
-            <label className="mt-3 block text-sm text-muted" htmlFor="reserve-email">
-              Adresse
-            </label>
-            <input
-              id="reserve-email"
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="mt-1 w-full border border-line bg-bg px-3 py-3 text-fg"
-              autoComplete="email"
-            />
-            {error ? <p className="mt-2 text-sm text-gold-soft">{error}</p> : null}
-            <button
-              type="submit"
-              className="mt-4 min-h-11 w-full bg-gold font-medium text-bg"
+        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/80 to-bg/25" />
+        <div className="relative mx-auto flex min-h-[82vh] max-w-6xl flex-col justify-end px-4 py-16">
+          <p className="font-display text-xs tracking-widest text-gold">Guide Sirius · Conscience Kongo</p>
+          <h1 className="mt-4 max-w-xl font-display text-4xl text-fg sm:text-6xl">Revenir à ce qui ne ment pas.</h1>
+          <p className="mt-5 max-w-xl text-muted">{shopBio}</p>
+          <div className="mt-8 flex flex-col items-start gap-3">
+            <a
+              href={waLink("Bonjour Guide Sirius, je souhaite entrer dans le Temple.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center bg-gold px-6 font-medium text-bg"
             >
-              Confirmer la demande
-            </button>
-            <p className="mt-2 text-xs text-muted">
-              Réservation uniquement. Le règlement se fait à la confirmation.
-            </p>
-          </form>
-        ) : null}
-      </aside>
-    </div>
+              Commander via WhatsApp
+            </a>
+            <a className="min-h-11 text-sm text-gold" href={`tel:+${WHATSAPP_E164}`}>
+              {WHATSAPP_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-surface">
+        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-14 md:grid-cols-3">
+          {[
+            ["Porte 1", "Purification", "Le geste d'eau. Le livre d'entrée.", "/le-chemin"],
+            ["Porte 2", "Fondations", "Les noms justes, puis la vue.", "/le-chemin"],
+            ["Porte 3", "Voie continue", "Le fil WhatsApp, et le cercle proche.", "/le-chemin"],
+          ].map(([step, title, copy, href]) => (
+            <Link key={step} to={href as "/le-chemin"} className="border border-line bg-bg p-5">
+              <p className="font-display text-gold">{step}</p>
+              <h2 className="mt-2 font-display text-2xl">{title}</h2>
+              <p className="mt-2 text-sm text-muted">{copy}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-14">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="font-display text-3xl">Les seuils</h2>
+          <Link to="/seuils" className="text-sm text-gold">Tout voir</Link>
+        </div>
+        <div className="mt-6 grid gap-4">
+          {formations.map((product) => (
+            <article key={product.id} className="grid gap-4 border border-line p-5 sm:grid-cols-[7rem_1fr_auto] sm:items-center">
+              <img
+                src={product.cover}
+                alt=""
+                className="h-28 w-full object-cover sm:h-24 sm:w-28"
+              />
+              <div>
+                <p className="text-xs tracking-widest text-gold">{product.kicker}</p>
+                <h3 className="mt-1 font-display text-2xl">
+                  <Link to="/seuils/$id" params={{ id: product.id }}>{product.name}</Link>
+                </h3>
+                <p className="mt-2 max-w-xl text-muted">{product.description}</p>
+              </div>
+              <div className="grid gap-3">
+                <PriceBlock product={product} />
+                <OrderActions product={product} />
+                <button
+                  type="button"
+                  className="min-h-11 text-left text-sm text-muted"
+                  onClick={() => useCart.getState().add(product.id)}
+                >
+                  Ajouter au panier
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-surface">
+        <div className="mx-auto max-w-6xl px-4 py-14">
+          <h2 className="font-display text-3xl">La bibliothèque</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {books.map((book) => (
+              <article key={book.id} className="border border-line bg-bg">
+                <Link to="/seuils/$id" params={{ id: book.id }} className="relative block">
+                  <img
+                    src={book.cover}
+                    alt={`Couverture de ${book.name}. Livre noir, marque d'or, titre posé par le Temple.`}
+                    className="aspect-[4/5] w-full object-cover"
+                  />
+                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg via-bg/80 to-transparent px-4 pt-10 pb-4 font-display text-xl text-gold">
+                    {book.name}
+                  </span>
+                </Link>
+                <div className="p-5">
+                <p className="text-sm text-muted">{book.description}</p>
+                <div className="mt-4">
+                  <PriceBlock product={book} />
+                </div>
+                <div className="mt-4">
+                  <OrderActions product={book} />
+                </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-14">
+        <h2 className="font-display text-3xl">Paroles reçues</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {echoes.slice(0, 3).map((echo) => (
+            <blockquote key={echo.id} className="border border-line p-5">
+              <p className="text-fg">{echo.text}</p>
+              <footer className="mt-4 text-sm text-muted">
+                {echo.name}, {echo.city}
+                <span className="block text-gold">{echo.about}</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+        <Link to="/temoignages" className="mt-6 inline-flex min-h-11 items-center text-gold">
+          Toutes les paroles
+        </Link>
+      </section>
+    </main>
   );
 }

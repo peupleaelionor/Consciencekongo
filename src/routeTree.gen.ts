@@ -10,33 +10,246 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BibliothequeRouteImport } from './routes/bibliotheque'
+import { Route as CancelRouteImport } from './routes/cancel'
+import { Route as CgvRouteImport } from './routes/cgv'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as FormationContinueRouteImport } from './routes/formation-continue'
+import { Route as LeCheminRouteImport } from './routes/le-chemin'
+import { Route as LeGuideRouteImport } from './routes/le-guide'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as SuccessRouteImport } from './routes/success'
+import { Route as TemoignagesRouteImport } from './routes/temoignages'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as SeuilsIndexRouteImport } from './routes/seuils/index'
+import { Route as SeuilsIdRouteImport } from './routes/seuils/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliothequeRoute = BibliothequeRouteImport.update({
+  id: '/bibliotheque',
+  path: '/bibliotheque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CancelRoute = CancelRouteImport.update({
+  id: '/cancel',
+  path: '/cancel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CgvRoute = CgvRouteImport.update({
+  id: '/cgv',
+  path: '/cgv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormationContinueRoute = FormationContinueRouteImport.update({
+  id: '/formation-continue',
+  path: '/formation-continue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeCheminRoute = LeCheminRouteImport.update({
+  id: '/le-chemin',
+  path: '/le-chemin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeGuideRoute = LeGuideRouteImport.update({
+  id: '/le-guide',
+  path: '/le-guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PolitiqueConfidentialiteRoute =
+  PolitiqueConfidentialiteRouteImport.update({
+    id: '/politique-confidentialite',
+    path: '/politique-confidentialite',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemoignagesRoute = TemoignagesRouteImport.update({
+  id: '/temoignages',
+  path: '/temoignages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeuilsIndexRoute = SeuilsIndexRouteImport.update({
+  id: '/seuils/',
+  path: '/seuils/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeuilsIdRoute = SeuilsIdRouteImport.update({
+  id: '/seuils/$id',
+  path: '/seuils/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bibliotheque': typeof BibliothequeRoute
+  '/cancel': typeof CancelRoute
+  '/cgv': typeof CgvRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/formation-continue': typeof FormationContinueRoute
+  '/le-chemin': typeof LeCheminRoute
+  '/le-guide': typeof LeGuideRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/success': typeof SuccessRoute
+  '/temoignages': typeof TemoignagesRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/seuils/$id': typeof SeuilsIdRoute
+  '/blog/': typeof BlogIndexRoute
+  '/seuils/': typeof SeuilsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bibliotheque': typeof BibliothequeRoute
+  '/cancel': typeof CancelRoute
+  '/cgv': typeof CgvRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/formation-continue': typeof FormationContinueRoute
+  '/le-chemin': typeof LeCheminRoute
+  '/le-guide': typeof LeGuideRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/success': typeof SuccessRoute
+  '/temoignages': typeof TemoignagesRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/seuils/$id': typeof SeuilsIdRoute
+  '/blog': typeof BlogIndexRoute
+  '/seuils': typeof SeuilsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bibliotheque': typeof BibliothequeRoute
+  '/cancel': typeof CancelRoute
+  '/cgv': typeof CgvRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/formation-continue': typeof FormationContinueRoute
+  '/le-chemin': typeof LeCheminRoute
+  '/le-guide': typeof LeGuideRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/success': typeof SuccessRoute
+  '/temoignages': typeof TemoignagesRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/seuils/$id': typeof SeuilsIdRoute
+  '/blog/': typeof BlogIndexRoute
+  '/seuils/': typeof SeuilsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bibliotheque'
+    | '/cancel'
+    | '/cgv'
+    | '/contact'
+    | '/faq'
+    | '/formation-continue'
+    | '/le-chemin'
+    | '/le-guide'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
+    | '/success'
+    | '/temoignages'
+    | '/blog/$slug'
+    | '/seuils/$id'
+    | '/blog/'
+    | '/seuils/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bibliotheque'
+    | '/cancel'
+    | '/cgv'
+    | '/contact'
+    | '/faq'
+    | '/formation-continue'
+    | '/le-chemin'
+    | '/le-guide'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
+    | '/success'
+    | '/temoignages'
+    | '/blog/$slug'
+    | '/seuils/$id'
+    | '/blog'
+    | '/seuils'
+  id:
+    | '__root__'
+    | '/'
+    | '/bibliotheque'
+    | '/cancel'
+    | '/cgv'
+    | '/contact'
+    | '/faq'
+    | '/formation-continue'
+    | '/le-chemin'
+    | '/le-guide'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
+    | '/success'
+    | '/temoignages'
+    | '/blog/$slug'
+    | '/seuils/$id'
+    | '/blog/'
+    | '/seuils/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BibliothequeRoute: typeof BibliothequeRoute
+  CancelRoute: typeof CancelRoute
+  CgvRoute: typeof CgvRoute
+  ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
+  FormationContinueRoute: typeof FormationContinueRoute
+  LeCheminRoute: typeof LeCheminRoute
+  LeGuideRoute: typeof LeGuideRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
+  PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
+  SuccessRoute: typeof SuccessRoute
+  TemoignagesRoute: typeof TemoignagesRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  SeuilsIdRoute: typeof SeuilsIdRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  SeuilsIndexRoute: typeof SeuilsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +261,139 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bibliotheque': {
+      id: '/bibliotheque'
+      path: '/bibliotheque'
+      fullPath: '/bibliotheque'
+      preLoaderRoute: typeof BibliothequeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cancel': {
+      id: '/cancel'
+      path: '/cancel'
+      fullPath: '/cancel'
+      preLoaderRoute: typeof CancelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cgv': {
+      id: '/cgv'
+      path: '/cgv'
+      fullPath: '/cgv'
+      preLoaderRoute: typeof CgvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/formation-continue': {
+      id: '/formation-continue'
+      path: '/formation-continue'
+      fullPath: '/formation-continue'
+      preLoaderRoute: typeof FormationContinueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/le-chemin': {
+      id: '/le-chemin'
+      path: '/le-chemin'
+      fullPath: '/le-chemin'
+      preLoaderRoute: typeof LeCheminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/le-guide': {
+      id: '/le-guide'
+      path: '/le-guide'
+      fullPath: '/le-guide'
+      preLoaderRoute: typeof LeGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politique-confidentialite': {
+      id: '/politique-confidentialite'
+      path: '/politique-confidentialite'
+      fullPath: '/politique-confidentialite'
+      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/temoignages': {
+      id: '/temoignages'
+      path: '/temoignages'
+      fullPath: '/temoignages'
+      preLoaderRoute: typeof TemoignagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seuils/': {
+      id: '/seuils/'
+      path: '/seuils'
+      fullPath: '/seuils/'
+      preLoaderRoute: typeof SeuilsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seuils/$id': {
+      id: '/seuils/$id'
+      path: '/seuils/$id'
+      fullPath: '/seuils/$id'
+      preLoaderRoute: typeof SeuilsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BibliothequeRoute: BibliothequeRoute,
+  CancelRoute: CancelRoute,
+  CgvRoute: CgvRoute,
+  ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
+  FormationContinueRoute: FormationContinueRoute,
+  LeCheminRoute: LeCheminRoute,
+  LeGuideRoute: LeGuideRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
+  PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
+  SuccessRoute: SuccessRoute,
+  TemoignagesRoute: TemoignagesRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  SeuilsIdRoute: SeuilsIdRoute,
+  BlogIndexRoute: BlogIndexRoute,
+  SeuilsIndexRoute: SeuilsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

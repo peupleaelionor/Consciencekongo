@@ -6,6 +6,8 @@ export type Order = {
   id: string;
   name: string;
   email: string;
+  phone: string;
+  city: string;
   lines: { id: string; name: string; price: number }[];
   total: number;
   at: string;
@@ -17,7 +19,7 @@ type CartState = {
   add: (id: string) => void;
   remove: (id: string) => void;
   clear: () => void;
-  place: (name: string, email: string) => Order | null;
+  place: (buyer: { name: string; email: string; phone: string; city: string }) => Order | null;
 };
 
 export const useCart = create<CartState>()(
@@ -31,7 +33,7 @@ export const useCart = create<CartState>()(
         ),
       remove: (id) => set((state) => ({ ids: state.ids.filter((item) => item !== id) })),
       clear: () => set({ ids: [] }),
-      place: (name, email) => {
+      place: (buyer) => {
         const lines = get()
           .ids.map((id) => products.find((product) => product.id === id))
           .filter((product): product is Product => Boolean(product))
@@ -43,8 +45,10 @@ export const useCart = create<CartState>()(
         if (!lines.length) return null;
         const order: Order = {
           id: `TS-${Date.now().toString(36).toUpperCase()}`,
-          name: name.trim(),
-          email: email.trim(),
+          name: buyer.name.trim(),
+          email: buyer.email.trim(),
+          phone: buyer.phone.trim(),
+          city: buyer.city.trim(),
           lines,
           total: lines.reduce((sum, line) => sum + line.price, 0),
           at: new Date().toISOString(),

@@ -1,6 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
+import { Shell } from "@/components/shell";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Temple Sirius";
@@ -14,12 +15,13 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Temple Sirius, boutique de Guide Sirius et de l'école Conscience Kongo. Quatre seuils numériques : vérité, racine et hauteur.",
+          "Temple Sirius, école Conscience Kongo. Spiritualité Kongo, rituels de purification et initiation avec Guide Sirius. Commande sur WhatsApp.",
       },
       { name: "theme-color", content: "#07140f" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "canonical", href: "https://consciencekongo.vercel.app/" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
@@ -37,7 +39,9 @@ export const Route = createRootRoute({
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <Outlet />
+          <Shell>
+            <Outlet />
+          </Shell>
         </AuthProvider>
         <Scripts />
       </body>
