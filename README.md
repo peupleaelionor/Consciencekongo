@@ -2,7 +2,7 @@
 
 Boutique de **Guide Sirius**, école **Conscience Kongo**.
 
-La commande passe par WhatsApp : [+243 965 531 737](https://wa.me/243965531737). La carte Stripe reste éteinte tant que `VITE_STRIPE_ENABLED` n'est pas `true`.
+La commande passe par WhatsApp : [082 30 21 893](https://wa.me/243823021893). La carte Stripe reste éteinte tant que `VITE_STRIPE_ENABLED` n'est pas `true`.
 
 | Seuil | Prix |
 |---|---|

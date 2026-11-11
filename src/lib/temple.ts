@@ -1,6 +1,6 @@
 export const SITE_URL = "https://consciencekongo.vercel.app";
-export const WHATSAPP_E164 = "243965531737";
-export const WHATSAPP_DISPLAY = "+243 965 531 737";
+export const WHATSAPP_E164 = "243823021893";
+export const WHATSAPP_DISPLAY = "082 30 21 893";
 export const WHATSAPP_HOURS = "Tous les jours, 9 h – 20 h, heure de Kinshasa. Réponse sous 24 h.";
 
 /** Taux fixes indicatifs, affichés comme tels. Pas un cours du jour. */

@@ -42,7 +42,7 @@ export const articles: Article[] = [
       "Porte 1, la purification. Un livre, sept jours, un geste. Tu vérifies si tu es capable de tenir quelque chose de petit. Si le petit rite tombe, le grand enseignement ne tiendra pas.",
       "Porte 2, les fondations. Le Début sur la Voie, Le Sceau d'Ankh, puis, si le rythme manque, Double Astre. Ici tu apprends les noms justes. Tu cesses d'emprunter des symboles comme on emprunte un costume.",
       "Porte 3, la voie continue. L'Aigle si tu veux la vue. L'Arbre Fermé si tu veux être lu de près. La Formation Continue si tu veux un fil après coup, sur WhatsApp, sans groupe bruyant.",
-      "Le Temple ne prend pas la carte aujourd'hui. Tu écris sur WhatsApp, au +243 965 531 737. Le message est déjà préparé sur chaque seuil. Guide Sirius répond sous vingt-quatre heures, heure de Kinshasa, et indique comment régler : Mobile Money, virement, ou le lien qu'il envoie.",
+      "Le Temple ne prend pas la carte aujourd'hui. Tu écris sur WhatsApp, au 082 30 21 893. Le message est déjà préparé sur chaque seuil. Guide Sirius répond sous vingt-quatre heures, heure de Kinshasa, et indique comment régler : Mobile Money, virement, ou le lien qu'il envoie.",
       "Ce que l'école ne fera pas : te promettre un pouvoir, te demander de haïr pour te sentir réel, te vendre une identité de vitrine. Si tu cherches cela, une autre maison te répondra plus vite. Ici, on demande de voir.",
     ],
   },
