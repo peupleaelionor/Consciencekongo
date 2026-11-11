@@ -54,9 +54,9 @@ function Guide() {
               alt={`${station.n}. ${station.title}. Planche officielle de Guide Sirius.`}
               className="w-full border border-line"
             />
-            <p className="mt-4 font-display text-sm text-gold">{station.n}</p>
-            <h2 className="mt-1 font-display text-xl">{station.title}</h2>
-            <p className="mt-2 text-sm text-muted">{station.line}</p>
+            <p className="mt-4 pr-20 font-display text-sm text-gold sm:pr-0">{station.n}</p>
+            <h2 className="mt-1 pr-20 font-display text-xl sm:pr-0">{station.title}</h2>
+            <p className="mt-2 pr-20 text-sm text-muted sm:pr-0">{station.line}</p>
           </li>
         ))}
       </ol>

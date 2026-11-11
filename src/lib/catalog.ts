@@ -155,7 +155,7 @@ export const products: Product[] = [
   {
     id: "continue",
     name: "Formation Continue",
-    price: 37,
+    price: 70,
     period: "mois",
     kicker: "Porte 3 · WhatsApp",
     description: "Le suivi de la voie : une présence mensuelle, des repères, une question qui avance.",

@@ -5,7 +5,7 @@ import { SITE_URL, WHATSAPP_DISPLAY } from "@/lib/temple";
 const faqs = [
   { q: "Comment commander ?", a: "Chaque seuil a un bouton WhatsApp. Le message part déjà écrit, avec le nom et le prix. Tu ajoutes ton nom. Guide Sirius répond." },
   { q: "Quel numéro ?", a: `${WHATSAPP_DISPLAY}. C'est le seul numéro de commande.` },
-  { q: "Puis-je payer par carte ?", a: "Pas encore. Le bouton carte est visible, et éteint. WhatsApp reste ouvert : Mobile Money, virement, ou le lien que le Guide envoie." },
+  { q: "Puis-je payer par carte ?", a: "Le bouton est actif. Si le compte carte n'est pas encore relié, il le dit et rien n'est débité. La commande ouverte aujourd'hui est WhatsApp : Mobile Money, virement, ou le lien que le Guide envoie." },
   { q: "Quand arrive l'accès ?", a: "Après confirmation du règlement, sous 24 h en général. Le lien vient par WhatsApp, et par email si tu l'as laissé." },
   { q: "Puis-je être remboursé ?", a: "Oui, sept jours, tant que l'accès n'a pas été ouvert. Une fois le lien envoyé, le seuil est franchi." },
   { q: "Par où commencer ?", a: "Par Le Chemin. Porte 1 si tu arrives. L'Aigle de Sirius est le cœur, pas la première marche." },

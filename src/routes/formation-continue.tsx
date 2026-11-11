@@ -10,7 +10,7 @@ export const Route = createFileRoute("/formation-continue")({
       { title: "Formation continue — Temple Sirius" },
       {
         name: "description",
-        content: "Accompagnement mensuel sur WhatsApp avec Guide Sirius. 37 euros par mois.",
+        content: "Accompagnement mensuel sur WhatsApp avec Guide Sirius. 70 euros par mois.",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/formation-continue` }],
