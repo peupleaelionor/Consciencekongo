@@ -20,7 +20,7 @@ function Privacy() {
         <p>Responsable : Conscience Kongo, Guide Sirius. Contact : {WHATSAPP_DISPLAY}.</p>
         <p>Le site enregistre ton panier dans la mémoire de ton navigateur, sur ton appareil. Ce n'est pas envoyé à un serveur du Temple tant que tu n'ouvres pas WhatsApp.</p>
         <p>Quand tu écris sur WhatsApp, la conversation est traitée par WhatsApp et par le Temple pour répondre à ta commande. Données utiles : nom, téléphone, ville, email si tu le donnes, seuils choisis.</p>
-        <p>Pas de publicité ciblée. Pas de revente. Pas d'outil de heatmap tant qu'il n'est pas annoncé ici, avec ton accord.</p>
+        <p>Pas de publicité ciblée. Pas de revente. Une mesure d'audience ne se charge que si tu choisis « Accepter la mesure ». Elle compte les visites, les clics vers WhatsApp, les clics « Payer par carte » et le fait d'avoir lu les trois quarts d'une page. Rien d'autre. « Essentiels seulement » ne charge rien.</p>
         <p>Tu peux demander l'accès, la correction ou l'effacement de ce que le Temple a gardé de toi, par le même numéro. Délai : un mois.</p>
         <p>Hébergement : Vercel. Le bandeau du site ne sert qu'à rappeler ce stockage local.</p>
       </div>

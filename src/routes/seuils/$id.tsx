@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Page } from "@/components/page";
 import { OrderActions, PriceBlock } from "@/components/order";
-import { productById, products, type Product } from "@/lib/catalog";
+import { benefits, productById, products, type Product } from "@/lib/catalog";
 import { SITE_URL } from "@/lib/temple";
 
 export const Route = createFileRoute("/seuils/$id")({
@@ -69,7 +69,10 @@ function Fiche() {
               className="w-full border border-line object-cover"
             />
             {product.kind === "livre" ? (
-              <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg to-transparent px-4 pt-12 pb-4 font-display text-2xl text-gold">
+              <p
+                className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg via-bg/80 to-transparent px-4 pt-16 pb-4 font-display text-2xl tracking-wide"
+                style={{ color: "#C9A961" }}
+              >
                 {product.name}
               </p>
             ) : null}
@@ -80,6 +83,12 @@ function Fiche() {
               <li key={item}>{item}</li>
             ))}
           </ol>
+          <h2 className="mt-8 font-display text-2xl">Ce que cela change</h2>
+          <ul className="mt-3 space-y-2 text-muted">
+            {(benefits[product.id] ?? []).map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
           <h2 className="mt-8 font-display text-2xl">Ce que tu reçois</h2>
           <ul className="mt-3 space-y-2 text-muted">
             {product.includes.map((item) => (

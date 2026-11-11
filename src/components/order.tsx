@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { formatPrice, type Product } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout.functions";
-import { formatCdf, formatUsd, orderMessage, stripeEnabled, waLink } from "@/lib/temple";
+import { formatCdf, formatUsd, orderMessage, waLink } from "@/lib/temple";
 
 export function priceLabel(product: Product) {
   return formatPrice(product.price, product.period);
@@ -18,10 +19,16 @@ export function PriceBlock({ product }: { product: Product }) {
   );
 }
 
+function mark(name: string) {
+  const plausible = (window as Window & { plausible?: (event: string) => void }).plausible;
+  plausible?.(name);
+}
+
 export function OrderActions({ product }: { product: Product }) {
+  const [note, setNote] = useState("");
   const href = waLink(orderMessage(product.name, priceLabel(product)));
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
       <a
         href={href}
         target="_blank"
@@ -33,18 +40,26 @@ export function OrderActions({ product }: { product: Product }) {
       </a>
       <button
         type="button"
-        disabled={!stripeEnabled}
+        className="inline-flex min-h-11 items-center justify-center border border-line px-5 text-sm text-fg"
         onClick={() => {
-          void startCheckout({ data: { productId: product.id } });
+          mark("Acheter");
+          setNote("");
+          void startCheckout({ data: { productId: product.id } }).then((result) => {
+            if (result.ok) {
+              window.location.assign(result.url);
+              return;
+            }
+            setNote("La carte n'est pas encore ouverte. Écris sur WhatsApp : Mobile Money, virement, ou le lien que le Guide envoie.");
+          });
         }}
-        className="inline-flex min-h-11 items-center justify-center border border-line px-5 text-sm text-muted disabled:cursor-not-allowed"
-        aria-describedby={`carte-${product.id}`}
       >
-        Payer par carte (bientôt)
+        Payer par carte
       </button>
-      <p id={`carte-${product.id}`} className="text-xs text-muted sm:sr-only">
-        La carte s'ouvrira quand Stripe sera activé. En attendant, WhatsApp confirme le règlement.
-      </p>
+      {note ? (
+        <p className="w-full text-xs text-muted" role="status">
+          {note}
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -198,6 +198,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
       <SearchDialog open={search} onClose={() => setSearch(false)} />
       <Cookies />
+      <Measure />
     </div>
   );
 }
@@ -357,24 +358,25 @@ function SearchDialog({ open, onClose }: { open: boolean; onClose: () => void })
 function Cookies() {
   const [seen, setSeen] = useState(true);
   useEffect(() => {
-    setSeen(window.localStorage.getItem("temple-cookies") === "essentiels");
+    setSeen(window.localStorage.getItem("temple-cookies") !== null);
   }, []);
   if (seen) return null;
+  const choose = (value: "essentiels" | "mesure") => {
+    window.localStorage.setItem("temple-cookies", value);
+    setSeen(true);
+    if (value === "mesure") window.dispatchEvent(new Event("temple-mesure"));
+  };
   return (
     <div className="fixed inset-x-4 bottom-24 z-40 border border-line bg-surface p-4 sm:right-auto sm:max-w-md" role="dialog" aria-label="Cookies">
       <p className="text-sm text-muted">
-        Le Temple garde ton panier sur cet appareil. Pas de pistage publicitaire. Le détail est dans la politique de confidentialité.
+        Le panier reste sur cet appareil. La mesure d'audience, si tu l'acceptes, ne sert qu'à savoir quelles portes sont lues. Pas de publicité.
       </p>
-      <div className="mt-3 flex gap-3">
-        <button
-          type="button"
-          className="min-h-11 bg-gold px-4 text-sm font-medium text-bg"
-          onClick={() => {
-            window.localStorage.setItem("temple-cookies", "essentiels");
-            setSeen(true);
-          }}
-        >
-          Compris
+      <div className="mt-3 flex flex-wrap gap-3">
+        <button type="button" className="min-h-11 bg-gold px-4 text-sm font-medium text-bg" onClick={() => choose("mesure")}>
+          Accepter la mesure
+        </button>
+        <button type="button" className="min-h-11 border border-line px-4 text-sm" onClick={() => choose("essentiels")}>
+          Essentiels seulement
         </button>
         <Link to="/politique-confidentialite" className="inline-flex min-h-11 items-center text-sm text-gold">
           Lire
@@ -382,6 +384,53 @@ function Cookies() {
       </div>
     </div>
   );
+}
+
+function Measure() {
+  useEffect(() => {
+    let scrolled = false;
+    const onScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      if (height <= 0 || scrolled) return;
+      if (window.scrollY / height < 0.75) return;
+      scrolled = true;
+      (window as Window & { plausible?: (event: string) => void }).plausible?.("Scroll 75");
+    };
+    const onClick = (event: MouseEvent) => {
+      const link = (event.target as HTMLElement | null)?.closest("a[href*='wa.me']");
+      if (!link) return;
+      (window as Window & { plausible?: (event: string) => void }).plausible?.("WhatsApp");
+    };
+    const arm = () => {
+      if (window.localStorage.getItem("temple-cookies") !== "mesure") return;
+      const domain = import.meta.env.VITE_PLAUSIBLE_DOMAIN as string | undefined;
+      if (domain && !document.querySelector("script[data-plausible]")) {
+        const queue = (window as Window & { plausible?: ((event: string) => void) & { q?: unknown[] } }).plausible;
+        if (!queue) {
+          const stub = ((...args: unknown[]) => {
+            (stub.q = stub.q || []).push(args);
+          }) as ((event: string) => void) & { q?: unknown[] };
+          (window as Window & { plausible?: typeof stub }).plausible = stub;
+        }
+        const script = document.createElement("script");
+        script.defer = true;
+        script.dataset.domain = domain;
+        script.dataset.plausible = "1";
+        script.src = "https://plausible.io/js/script.js";
+        document.head.appendChild(script);
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      document.addEventListener("click", onClick);
+    };
+    arm();
+    window.addEventListener("temple-mesure", arm);
+    return () => {
+      window.removeEventListener("temple-mesure", arm);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+  return null;
 }
 
 export function Crumbs({ items }: { items: { label: string; to?: "/" | "/le-chemin" | "/seuils" | "/bibliotheque" | "/blog" | "/contact" }[] }) {

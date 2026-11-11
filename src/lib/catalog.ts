@@ -128,7 +128,7 @@ export const products: Product[] = [
     faq: [
       { q: "Par où si je débute ?", a: "Rituels de Purification ou Le Sceau d'Ankh. L'Aigle est le cœur, pas la porte d'entrée forcée." },
       { q: "Accès ?", a: "Permanent, ouvert après paiement confirmé sur WhatsApp." },
-      { q: "Carte bancaire ?", a: "Pas encore. WhatsApp règle aujourd'hui : Mobile Money, virement, ou le lien que le Guide envoie." },
+      { q: "Carte bancaire ?", a: "Si la carte est ouverte, le bouton « Payer par carte » mène au règlement. Sinon, WhatsApp : Mobile Money, virement, ou le lien que le Guide envoie." },
     ],
   },
   {
@@ -194,3 +194,49 @@ export function productById(id: string) {
 
 export const books = products.filter((product) => product.kind === "livre");
 export const formations = products.filter((product) => product.kind !== "livre");
+
+export const benefits: Record<string, string[]> = {
+  purification: [
+    "Préparer le corps et l'esprit avant d'entrer",
+    "Tenir un rite d'eau, sans théâtre",
+    "Sept jours, un geste court par jour",
+    "Savoir ce qu'il faut, et ce qu'il faut cesser",
+  ],
+  debut: [
+    "Comprendre d'où vient la voie",
+    "Poser les symboles sans folklore",
+    "Tenir un rite sans se mentir",
+    "Savoir quelle porte vient ensuite",
+  ],
+  sceau: [
+    "Nommer d'où vient la lignée",
+    "Cesser une négociation intérieure",
+    "Éprouver l'école avant la formation centrale",
+    "Recevoir une limite, pas un objet",
+  ],
+  astre: [
+    "Remettre le jour et la nuit sur le même axe",
+    "Quatorze mesures, pas une humeur",
+    "Voir où la clarté contredit l'ombre",
+    "Un rythme court, tenu chez soi",
+  ],
+  aigle: [
+    "Voir d'en haut sans quitter la terre",
+    "Couper une illusion précise",
+    "Reprendre une parole qui ne tremble pas",
+    "Huit modules, un accès qui reste",
+  ],
+  arbre: [
+    "Trente jours de présence réelle",
+    "Une lecture de chemin, pas un fichier seul",
+    "Un sceau personnel à la fin du mois",
+    "Un cercle fermé, peu de places",
+  ],
+  continue: [
+    "Ne pas rester seul une fois le livre fermé",
+    "Un repère chaque mois",
+    "Une question nette, une réponse tenue",
+    "Un mois, sans engagement forcé au-delà",
+  ],
+};
+

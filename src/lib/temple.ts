@@ -14,7 +14,7 @@ export function waLink(message: string) {
 }
 
 export function orderMessage(name: string, priceLabel: string) {
-  return `Bonjour Guide Sirius, je souhaite réserver le seuil "${name}" (${priceLabel}).`;
+  return `Bonjour Guide Sirius, je souhaite commander ${name} (${priceLabel}).`;
 }
 
 export function formatUsd(eur: number) {

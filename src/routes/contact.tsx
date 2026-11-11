@@ -41,6 +41,9 @@ function Contact() {
             Appeler
           </a>
           <p className="mt-4 text-sm text-muted">République démocratique du Congo. Le Temple répond depuis Kinshasa.</p>
+          <p className="mt-4 text-sm text-muted">
+            Deux règlements. Sur WhatsApp : Mobile Money, virement, ou le lien que le Guide envoie. Par carte : le bouton sur la fiche, quand le compte est relié. Dans les deux cas, l'accès part par message.
+          </p>
         </div>
         <form
           className="border border-line p-5"
