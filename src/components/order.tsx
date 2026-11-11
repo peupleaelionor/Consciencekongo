@@ -2,6 +2,7 @@ import { useState } from "react";
 import { formatPrice, type Product } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout.functions";
 import { formatCdf, formatUsd, orderMessage, waLink } from "@/lib/temple";
+import { openWhatsappOrder } from "@/lib/orders.functions";
 
 export function priceLabel(product: Product) {
   return formatPrice(product.price, product.period);
@@ -26,15 +27,30 @@ function mark(name: string) {
 
 export function OrderActions({ product }: { product: Product }) {
   const [note, setNote] = useState("");
-  const href = waLink(orderMessage(product.name, priceLabel(product)));
+  const fallback = waLink(orderMessage(product.name, priceLabel(product)));
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
       <a
-        href={href}
+        href={fallback}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex min-h-11 items-center justify-center bg-gold px-5 text-sm font-medium text-bg"
         aria-label={`Commander ${product.name} via WhatsApp`}
+        onClick={(event) => {
+          event.preventDefault();
+          mark("WhatsApp");
+          const popup = window.open("", "_blank");
+          void openWhatsappOrder({ data: { productId: product.id } })
+            .then((result) => {
+              const href = result.href || fallback;
+              if (popup) popup.location.href = href;
+              else window.location.assign(href);
+            })
+            .catch(() => {
+              if (popup) popup.location.href = fallback;
+              else window.location.assign(fallback);
+            });
+        }}
       >
         Commander via WhatsApp
       </a>

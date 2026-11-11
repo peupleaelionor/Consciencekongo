@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { formatPrice, productById, products, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
+import { openCartOrders } from "@/lib/orders.functions";
 import { WHATSAPP_DISPLAY, WHATSAPP_E164, waLink } from "@/lib/temple";
 
 const nav = [
@@ -211,6 +212,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
   const titleId = useId();
   const lines = ids
     .map((id) => productById(id))
@@ -260,32 +262,55 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             className="border-t border-line px-5 py-4"
             onSubmit={(event) => {
               event.preventDefault();
+              if (sending) return;
               if (name.trim().length < 2 || phone.trim().length < 8) {
                 setError("Nom et téléphone, pour que le Guide puisse répondre.");
                 return;
               }
-              const body = [
-                "Bonjour Guide Sirius, je souhaite réserver :",
-                "",
-                ...lines.map((line) => `- ${line.name} (${formatPrice(line.price, line.period)})`),
-                "",
-                `Total : ${formatPrice(total)}`,
-                "",
-                `Nom : ${name.trim()}`,
-                `Téléphone : ${phone.trim()}`,
-                email.trim() ? `Email : ${email.trim()}` : "",
-                city.trim() ? `Ville : ${city.trim()}` : "",
-              ]
-                .filter(Boolean)
-                .join("\n");
-              useCart.getState().place({
+              const popup = window.open("", "_blank");
+              setSending(true);
+              const linesSnapshot = lines;
+              const who = {
                 name: name.trim(),
-                email: email.trim(),
                 phone: phone.trim(),
+                email: email.trim(),
                 city: city.trim(),
-              });
-              window.open(waLink(body), "_blank", "noopener,noreferrer");
-              onClose();
+              };
+              void openCartOrders({
+                data: {
+                  lines: linesSnapshot.map((line) => ({ productId: line.id })),
+                  name: who.name,
+                  phone: who.phone,
+                  email: who.email,
+                  city: who.city,
+                },
+              })
+                .then((result) => result.refs)
+                .catch(() => [] as string[])
+                .then((refs) => {
+                  const totalLabel = formatPrice(linesSnapshot.reduce((sum, line) => sum + line.price, 0));
+                  const body = [
+                    "Bonjour Guide Sirius, je souhaite réserver :",
+                    "",
+                    ...linesSnapshot.map((line) => `- ${line.name} (${formatPrice(line.price, line.period)})`),
+                    "",
+                    `Total : ${totalLabel}`,
+                    refs.length ? `Références : ${refs.join(", ")}` : "",
+                    "",
+                    `Nom : ${who.name}`,
+                    `Téléphone : ${who.phone}`,
+                    who.email ? `Email : ${who.email}` : "",
+                    who.city ? `Ville : ${who.city}` : "",
+                  ]
+                    .filter(Boolean)
+                    .join("\n");
+                  useCart.getState().place(who);
+                  const href = waLink(body);
+                  if (popup) popup.location.href = href;
+                  else window.location.assign(href);
+                  setSending(false);
+                  onClose();
+                });
             }}
           >
             <p className="font-display text-2xl text-gold">{formatPrice(total)}</p>
@@ -298,8 +323,8 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             <label className="mt-3 block text-sm text-muted" htmlFor="cart-city">Ville</label>
             <input id="cart-city" value={city} onChange={(event) => setCity(event.target.value)} autoComplete="address-level2" className="mt-1 w-full border border-line bg-bg px-3 py-3 text-fg" />
             {error ? <p className="mt-2 text-sm text-gold-soft" role="alert">{error}</p> : null}
-            <button type="submit" className="mt-4 min-h-11 w-full bg-gold font-medium text-bg">
-              Envoyer la commande sur WhatsApp
+            <button type="submit" disabled={sending} className="mt-4 min-h-11 w-full bg-gold font-medium text-bg disabled:opacity-60">
+              {sending ? "Ouverture…" : "Envoyer la commande sur WhatsApp"}
             </button>
             <p className="mt-2 text-xs text-muted">
               Aucun débit ici. Guide Sirius confirme le règlement : Mobile Money, virement, ou lien.

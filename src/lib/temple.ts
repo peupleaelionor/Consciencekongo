@@ -13,8 +13,9 @@ export function waLink(message: string) {
   return `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(message)}`;
 }
 
-export function orderMessage(name: string, priceLabel: string) {
-  return `Bonjour Guide Sirius, je souhaite commander ${name} (${priceLabel}).`;
+export function orderMessage(name: string, priceLabel: string, ref?: string | null) {
+  const base = `Bonjour Guide Sirius, je souhaite commander ${name} (${priceLabel}).`;
+  return ref ? `${base}\nRéférence : ${ref}` : base;
 }
 
 export function formatUsd(eur: number) {

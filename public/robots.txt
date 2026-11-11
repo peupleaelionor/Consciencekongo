@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /registre
 
 Sitemap: https://consciencekongo.vercel.app/sitemap.xml

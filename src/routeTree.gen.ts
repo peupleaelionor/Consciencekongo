@@ -20,6 +20,7 @@ import { Route as LeCheminRouteImport } from './routes/le-chemin'
 import { Route as LeGuideRouteImport } from './routes/le-guide'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as RegistreRouteImport } from './routes/registre'
 import { Route as SuccessRouteImport } from './routes/success'
 import { Route as TemoignagesRouteImport } from './routes/temoignages'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
@@ -83,6 +84,11 @@ const PolitiqueConfidentialiteRoute =
     path: '/politique-confidentialite',
     getParentRoute: () => rootRouteImport,
   } as any)
+const RegistreRoute = RegistreRouteImport.update({
+  id: '/registre',
+  path: '/registre',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SuccessRoute = SuccessRouteImport.update({
   id: '/success',
   path: '/success',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/le-guide': typeof LeGuideRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/registre': typeof RegistreRoute
   '/success': typeof SuccessRoute
   '/temoignages': typeof TemoignagesRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/le-guide': typeof LeGuideRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/registre': typeof RegistreRoute
   '/success': typeof SuccessRoute
   '/temoignages': typeof TemoignagesRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/le-guide': typeof LeGuideRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/registre': typeof RegistreRoute
   '/success': typeof SuccessRoute
   '/temoignages': typeof TemoignagesRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/le-guide'
     | '/mentions-legales'
     | '/politique-confidentialite'
+    | '/registre'
     | '/success'
     | '/temoignages'
     | '/blog/$slug'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/le-guide'
     | '/mentions-legales'
     | '/politique-confidentialite'
+    | '/registre'
     | '/success'
     | '/temoignages'
     | '/blog/$slug'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/le-guide'
     | '/mentions-legales'
     | '/politique-confidentialite'
+    | '/registre'
     | '/success'
     | '/temoignages'
     | '/blog/$slug'
@@ -244,6 +256,7 @@ export interface RootRouteChildren {
   LeGuideRoute: typeof LeGuideRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
+  RegistreRoute: typeof RegistreRoute
   SuccessRoute: typeof SuccessRoute
   TemoignagesRoute: typeof TemoignagesRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -331,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/registre': {
+      id: '/registre'
+      path: '/registre'
+      fullPath: '/registre'
+      preLoaderRoute: typeof RegistreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/success': {
       id: '/success'
       path: '/success'
@@ -388,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeGuideRoute: LeGuideRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
+  RegistreRoute: RegistreRoute,
   SuccessRoute: SuccessRoute,
   TemoignagesRoute: TemoignagesRoute,
   BlogSlugRoute: BlogSlugRoute,

@@ -3,7 +3,8 @@ import { Page } from "@/components/page";
 import { SITE_URL, WHATSAPP_DISPLAY } from "@/lib/temple";
 
 const faqs = [
-  { q: "Comment commander ?", a: "Chaque seuil a un bouton WhatsApp. Le message part déjà écrit, avec le nom et le prix. Tu ajoutes ton nom. Guide Sirius répond." },
+  { q: "Comment commander ?", a: "Chaque seuil a un bouton WhatsApp. Le message part déjà écrit, avec le nom, le prix et une référence. Tu ajoutes ton nom. Guide Sirius répond." },
+  { q: "À quoi sert la référence dans le message ?", a: "C'est le numéro de l'intention, du type CK-7F3A. Garde-le. Le Guide s'en sert pour confirmer ton règlement." },
   { q: "Quel numéro ?", a: `${WHATSAPP_DISPLAY}. C'est le seul numéro de commande.` },
   { q: "Puis-je payer par carte ?", a: "Le bouton est actif. Si le compte carte n'est pas encore relié, il le dit et rien n'est débité. La commande ouverte aujourd'hui est WhatsApp : Mobile Money, virement, ou le lien que le Guide envoie." },
   { q: "Quand arrive l'accès ?", a: "Après confirmation du règlement, sous 24 h en général. Le lien vient par WhatsApp, et par email si tu l'as laissé." },
