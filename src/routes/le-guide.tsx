@@ -6,11 +6,11 @@ import { SITE_URL, waLink } from "@/lib/temple";
 export const Route = createFileRoute("/le-guide")({
   head: () => ({
     meta: [
-      { title: "Guide Sirius — Temple Sirius" },
+      { title: "Guide Sirius Kasembe — Temple Sirius" },
       {
         name: "description",
         content:
-          "Les huit stations de Guide Sirius, de Conscience Kongo. Le réveil, le combat, la mémoire, l'épreuve.",
+          "Guide Sirius Kasembe, Conscience Kongo. La planche officielle, puis les huit stations de la voie.",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/le-guide` }],
@@ -22,27 +22,30 @@ function Guide() {
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Guide Sirius",
+    name: "Guide Sirius Kasembe",
     affiliation: "Conscience Kongo",
-    image: `${SITE_URL}/brand/guide-visage.webp`,
+    image: `${SITE_URL}/brand/guide-kasembe.webp`,
     url: `${SITE_URL}/le-guide`,
   };
   return (
     <Page
       kicker="Le Guide"
       title="Il indique. Il ne raccourcit pas."
-      lede="Huit stations. On ne vient pas pour un visage. On vient pour voir comment la voie se tient."
+      lede="Guide Sirius Kasembe. La planche officielle d'abord. Les huit stations ensuite."
       crumbs={[{ label: "Le Guide" }]}
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
-      <div className="flex items-center gap-4">
+      <figure className="mx-auto w-full max-w-md">
         <img
-          src="/brand/guide-visage.webp"
-          alt="Guide Sirius."
-          className="h-16 w-16 shrink-0 border border-line object-cover object-top"
+          src="/brand/guide-kasembe.webp"
+          alt="Planche officielle de Guide Sirius Kasembe : voile blanc, lanterne, le titre Conscience Kongo."
+          className="w-full border border-line"
         />
-        <p className="text-sm text-muted">Guide Sirius · Conscience Kongo</p>
-      </div>
+        <figcaption className="mt-4">
+          <p className="font-display text-xl text-gold">Guide Sirius Kasembe</p>
+          <p className="mt-1 text-sm text-muted">Conscience Kongo. Il tient la lampe. Il ne se met pas devant le seuil.</p>
+        </figcaption>
+      </figure>
       <ol className="mt-14 grid gap-14">
         {stations.map((station) => (
           <li key={station.n} className="mx-auto w-full max-w-sm">
@@ -61,7 +64,7 @@ function Guide() {
         <h2 className="font-display text-2xl">La tenue</h2>
         <div className="mt-4 space-y-4 text-muted">
           <p>
-            Guide Sirius n'est pas un titre acheté. C'est une fonction : tenir la lampe pendant qu'une personne redescend dans ce qu'on lui a appris, puis remonte avec une parole qui lui appartient.
+            Guide Sirius Kasembe n'est pas un titre acheté. C'est une fonction : tenir la lampe pendant qu'une personne redescend dans ce qu'on lui a appris, puis remonte avec une parole qui lui appartient.
           </p>
           <p>
             Conscience Kongo existe parce qu'une conscience sans racine finit par parler avec une voix d'emprunt. L'école ne vend pas un réveil spectaculaire. Elle transmet des seuils. Le premier est un geste : laver ce qui encombre. Le suivant est un nom : savoir d'où l'on vient sans s'enfermer dans un récit inventé. Ensuite, pour qui tient, une présence — un mois, un fil, une lecture proche.
