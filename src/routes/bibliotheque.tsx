@@ -30,18 +30,18 @@ function Bibliotheque() {
       <div className="grid gap-4 md:grid-cols-3">
         {books.map((book) => (
           <article key={book.id} className="flex flex-col border border-line">
-            <Link to="/seuils/$id" params={{ id: book.id }} className="relative block">
+            <Link to="/seuils/$id" params={{ id: book.id }} className="block bg-bg">
               <img
                 src={book.cover}
                 alt={`Couverture de ${book.name}.`}
-                className="aspect-[4/5] w-full object-cover"
+                className="aspect-square w-full object-contain p-3"
               />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg to-transparent px-4 pt-10 pb-4 font-display text-xl text-gold">
-                {book.name}
-              </span>
             </Link>
             <div className="flex flex-1 flex-col p-5">
-            <p className="flex-1 text-sm text-muted">{book.description}</p>
+            <h2 className="font-display text-xl">
+              <Link to="/seuils/$id" params={{ id: book.id }}>{book.name}</Link>
+            </h2>
+            <p className="mt-2 flex-1 text-sm text-muted">{book.description}</p>
             <div className="mt-4">
               <PriceBlock product={book} />
             </div>

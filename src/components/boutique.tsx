@@ -62,7 +62,7 @@ export function Boutique() {
               <img
                 src={product.cover}
                 alt=""
-                className="h-28 w-full object-cover sm:h-24 sm:w-28"
+                className="h-28 w-full object-contain sm:h-24 sm:w-28"
               />
               <div>
                 <p className="text-xs tracking-widest text-gold">{product.kicker}</p>
@@ -93,18 +93,18 @@ export function Boutique() {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {books.map((book) => (
               <article key={book.id} className="border border-line bg-bg">
-                <Link to="/seuils/$id" params={{ id: book.id }} className="relative block">
+                <Link to="/seuils/$id" params={{ id: book.id }} className="block bg-bg">
                   <img
                     src={book.cover}
-                    alt={`Couverture de ${book.name}. Livre noir, marque d'or, titre posé par le Temple.`}
-                    className="aspect-[4/5] w-full object-cover"
+                    alt={`Couverture de ${book.name}.`}
+                    className="aspect-square w-full object-contain p-3"
                   />
-                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg via-bg/80 to-transparent px-4 pt-10 pb-4 font-display text-xl text-gold">
-                    {book.name}
-                  </span>
                 </Link>
                 <div className="p-5">
-                <p className="text-sm text-muted">{book.description}</p>
+                <h3 className="font-display text-xl">
+                  <Link to="/seuils/$id" params={{ id: book.id }}>{book.name}</Link>
+                </h3>
+                <p className="mt-2 text-sm text-muted">{book.description}</p>
                 <div className="mt-4">
                   <PriceBlock product={book} />
                 </div>

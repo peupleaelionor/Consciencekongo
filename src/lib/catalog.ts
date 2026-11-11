@@ -75,7 +75,7 @@ export const products: Product[] = [
     description: "Le manuel du seuil. Qui tu es, d'où vient ta lignée, et ce que tu cesses de négocier.",
     long: "Le Sceau d'Ankh pose le nom. Pas une opinion : une limite. Ce manuel dit d'où vient la mémoire que l'école honore, et quelles négociations intérieures doivent cesser pour qu'un seuil suivant ait un sens.",
     format: "Livre numérique",
-    cover: "/brand/logo.jpg",
+    cover: "/brand/sceau-mark.webp",
     door: 2,
     kind: "livre",
     includes: ["Le manuel du seuil", "Les lois du premier nom", "Une lecture tenue, sans exercice gadget"],

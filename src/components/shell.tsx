@@ -55,9 +55,9 @@ export function Shell({ children }: { children: ReactNode }) {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
           <Link to="/" className="flex items-center gap-3" aria-label="Temple Sirius, accueil">
             <img
-              src="/brand/logo.jpg"
+              src="/brand/sceau-mark.webp"
               alt=""
-              className="h-14 w-10 object-cover"
+              className="h-14 w-14 object-contain"
             />
             <span className="leading-tight">
               <span className="block font-display text-sm tracking-widest text-gold">Temple Sirius</span>

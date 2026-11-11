@@ -58,24 +58,16 @@ function Fiche() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
       <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <div className="relative max-w-sm">
+          <div className="max-w-sm bg-bg">
             <img
               src={product.cover}
               alt={
                 product.kind === "livre"
-                  ? `Couverture de ${product.name}. Livre noir, marque d'or.`
+                  ? `Couverture de ${product.name}.`
                   : `Image du seuil ${product.name}.`
               }
-              className="w-full border border-line object-cover"
+              className="aspect-square w-full object-contain p-4"
             />
-            {product.kind === "livre" ? (
-              <p
-                className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg via-bg/80 to-transparent px-4 pt-16 pb-4 font-display text-2xl tracking-wide"
-                style={{ color: "#C9A961" }}
-              >
-                {product.name}
-              </p>
-            ) : null}
           </div>
           <h2 className="mt-8 font-display text-2xl">Sommaire</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-muted">

@@ -30,7 +30,7 @@ function Seuils() {
       <div className="grid gap-4">
         {formations.map((product) => (
           <article key={product.id} className="grid gap-4 border border-line p-5 md:grid-cols-[8rem_1fr_auto] md:items-center">
-            <img src={product.cover} alt="" className="h-32 w-full object-cover md:h-28 md:w-32" />
+            <img src={product.cover} alt="" className="h-32 w-full object-contain md:h-28 md:w-32" />
             <div>
               <p className="text-xs tracking-widest text-gold">{product.kicker}</p>
               <h2 className="mt-1 font-display text-2xl">
